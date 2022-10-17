@@ -14,7 +14,6 @@ class TimeSlicer(object):
         self.__current_time = 0.0
         self.__last_exec_time = 0.0
         self.__running = True
-        self.__timer_thread = None
         self.__target_func_thread = None
         self.__timer_sleep_time = 0.0001
 
@@ -49,11 +48,6 @@ class TimeSlicer(object):
         if kwargs is None:
             kwargs = {}
         self._kwargs = kwargs
-
-    # def __timerTask(self):
-    #     while self.__running:
-    #         self.__current_time = round(time.time()*10e3, 1)
-    #         time.sleep(self.__timer_sleep_time)
 
     def __updateTime(self):
         self.__current_time = round(time.time()*1000, 1)
