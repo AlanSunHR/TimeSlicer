@@ -6,7 +6,7 @@ pkg_dir = os.path.join(root_dir, "src/time_slicer")
 sys.path.append(pkg_dir)
 
 from random import randint
-from time_slicer import TimeSlicer
+from time_slicer import TimeSlicer, TargetOverdueError
 import time
 
 class Task(object):
@@ -22,7 +22,7 @@ class Task(object):
         for i in range(repeated_times):
             time_elasped = round((time.time()-self.time_start)*1000.0)
             print("[{}] ".format(time_elasped) + self.msg)
-            time.sleep(0.001)
+            time.sleep(0.03)
         time_end = round(time.time()*1000, 1)
         print("Time elasped (ms): ", time_end - time_start)
 
@@ -33,6 +33,11 @@ if __name__ == "__main__":
     ts.setTimeInterval(30)
     ts.setTargetFunc(task.task)
 
-    ts.start()
+    try:
+        ts.start()
+    except TargetOverdueError as e:
+        ts.start()
+        print(e)
+
     time.sleep(3)
     ts.stop()

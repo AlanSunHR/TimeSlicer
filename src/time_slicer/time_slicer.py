@@ -1,9 +1,7 @@
-from pyclbr import Function
-from threading import Timer, Thread
+from threading import Thread
 import time
-from types import MethodType
-from typing import Any
 from copy import deepcopy
+import warnings
 
 class TimeSlicer(object):
     def __init__(self, time_interval_ms=30, target_func=None, args=(), kwargs=None, wait_target=True):
@@ -70,7 +68,7 @@ class TimeSlicer(object):
                 time_elasped = self.__current_time - self.__last_exec_time
                 # If the execution time took longer than expected, raise the error
                 if time_elasped > self._time_interval_ms:
-                    raise TargetOverdueError(self._time_interval_ms, time_elasped)
+                    warnings.warn("Target function execution time ({} ms) exceeding the expected interval {} ms. ".format(time_elasped, self._time_interval_ms))
             else:
                 self.__updateTime()
                 time.sleep(self.__timer_sleep_time)
@@ -93,8 +91,3 @@ class TimeSlicer(object):
             Stop executing the target function
         '''
         self.__running = False
-        
-class TargetOverdueError(Exception):
-    def __init__(self, expected_interval, actual_exec_ms):
-        error_msg = "Target function execution time ({} ms) exceeding the expected interval {} ms. ".format(actual_exec_ms, expected_interval)
-        super().__init__(error_msg)
