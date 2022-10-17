@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: time-slicer
+Version: 0.0.3
+Summary: A simple way to slice time into interval of fixed length. 
+Author-email: Haoran Sun <hrsun@cs.hku.hk>
+Project-URL: Homepage, https://github.com/AlanSunHR/TimeSlicer.git
+Project-URL: Bug Tracker, https://github.com/AlanSunHR/TimeSlicer/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# TimeSlicer
+A simple package to slice time into intervals, so that code snippets can be executed in a fixed frequency, which might be useful for real-time robot control(but you should not expect to control in semi-millisecond level).
